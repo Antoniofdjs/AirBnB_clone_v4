@@ -11,18 +11,18 @@ header .logo {
 }
 
 header #api_status {
+    background-color: #CCCCCC;
     position: absolute;
+    height: 40px;
+    width: 40px;
     top: 15px;
     right: 30px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #CCCCCC;
     display: flex;
+    border-radius: 50%;
     justify-content: center;
     align-items: center;
 }
 
-#api_status.available {
+header #api_status.available {
     background-color: #ff545f;
 }
