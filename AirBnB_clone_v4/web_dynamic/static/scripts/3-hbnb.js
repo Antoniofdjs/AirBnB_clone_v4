@@ -10,6 +10,8 @@ $(document).ready(function () {
       delete checkedAmenities[amenityID];
     }
 
+		console.log("Checked amenities:", checkedAmenities);
+
     if (Object.keys(checkedAmenities).length != 0) {
       let spanText = Object.values(checkedAmenities).join(", ");
       let newSpan = "<span>" + spanText + "</span>";
@@ -28,6 +30,7 @@ $(document).ready(function () {
   });
 
   $.get("http://127.0.0.1:5001/api/v1/status/", data => {
+		console.log("API status data:", data);
     if (data.status === "OK") {
       $("#api_status").addClass("available");
     }  else {
@@ -41,6 +44,7 @@ $(document).ready(function () {
     contentType: "application/json",
     data: JSON.stringify({}),
     success: function(data) {
+			console.log("Places search data:", data);
       for (let place of data) {
         let article = $("<article></article>");
         let titleBox = $("<div class='title_box'></div>");
