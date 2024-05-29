@@ -10,7 +10,7 @@ $(document).ready(function () {
       delete checkedAmenities[amenityID];
     }
 
-		console.log("Checked amenities:", checkedAmenities);
+    console.log("Checked amenities:", checkedAmenities);
 
     if (Object.keys(checkedAmenities).length != 0) {
       let spanText = Object.values(checkedAmenities).join(", ");
@@ -29,22 +29,22 @@ $(document).ready(function () {
     });
   });
 
-  $.get("http://127.0.0.1:5001/api/v1/status/", data => {
-		console.log("API status data:", data);
+  $.get("http://127.0.0.1:5001/api/v1/status/", (data) => {
+    console.log("API status data:", data);
     if (data.status === "OK") {
       $("#api_status").addClass("available");
-    }  else {
-      $('#api_status').removeClass("available");
+    } else {
+      $("#api_status").removeClass("available");
     }
   });
 
-	$.ajax({
-    url: "http://0.0.0.0:5001/api/v1/places_search/",
+  $.ajax({
+    url: "http://127.0.0.1:5001/api/v1/places_search/",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({}),
-    success: function(data) {
-			console.log("Places search data:", data);
+    success: function (data) {
+      console.log("Places search data:", data);
       for (let place of data) {
         let article = $("<article></article>");
         let titleBox = $("<div class='title_box'></div>");
@@ -55,9 +55,15 @@ $(document).ready(function () {
         titleBox.append(priceByNight);
 
         let information = $("<div class='information'></div>");
-        let maxGuest = $("<div class='max_guest'></div>").text(`${place.max_guest} Guest${place.max_guest !== 1 ? 's' : ''}`);
-        let numberRooms = $("<div class='number_rooms'></div>").text(`${place.number_rooms} Bedroom${place.number_rooms !== 1 ? 's' : ''}`);
-        let numberBathrooms = $("<div class='number_bathrooms'></div>").text(`${place.number_bathrooms} Bathroom${place.number_bathrooms !== 1 ? 's' : ''}`);
+        let maxGuest = $("<div class='max_guest'></div>").text(
+          `${place.max_guest} Guest${place.max_guest !== 1 ? "s" : ""}`
+        );
+        let numberRooms = $("<div class='number_rooms'></div>").text(
+          `${place.number_rooms} Bedroom${place.number_rooms !== 1 ? "s" : ""}`
+        );
+        let numberBathrooms = $("<div class='number_bathrooms'></div>").text(
+          `${place.number_bathrooms} Bathroom${place.number_bathrooms !== 1 ? "s" : ""}`
+        );
 
         information.append(maxGuest);
         information.append(numberRooms);
@@ -71,6 +77,6 @@ $(document).ready(function () {
 
         $("section.places").append(article);
       }
-    }
+    },
   });
 });
