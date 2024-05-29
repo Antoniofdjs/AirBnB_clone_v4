@@ -1,5 +1,3 @@
-// static/scripts/2-hbnb.js
-
 $(document).ready(function () {
   let checkedAmenities = {};
   $(".amenities li input").change(function () {
@@ -29,7 +27,6 @@ $(document).ready(function () {
     });
   });
 
-  // Check the status of the API
   $.get('http://0.0.0.0:5001/api/v1/status/', function (data) {
     if (data.status === "OK") {
       $('#api_status').addClass('available');
