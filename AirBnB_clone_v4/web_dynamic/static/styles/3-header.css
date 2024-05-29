@@ -23,10 +23,6 @@ header #api_status {
   align-items: center;
 }
 
-.available {
-  background-color: #ff545f;
-}
-
 header #api_status.available {
   background-color: #ff545f;
 }
