@@ -37,43 +37,30 @@ $(document).ready(function () {
       $("#api_status").removeClass("available");
     }
   });
-
   $.ajax({
     url: "http://127.0.0.1:5001/api/v1/places_search/",
     type: "POST",
     contentType: "application/json",
-    data: JSON.stringify({}),
+    data: JSON.stringify({ amenities: amenitiesId }),
     success: function (data) {
-      console.log("Places search data:", data);
+      console.log("Result total");
+      console.log(data.length);
+      $("section.places").empty();
       for (let place of data) {
-        let article = $("<article></article>");
-        let titleBox = $("<div class='title_box'></div>");
-        let title = $("<h2></h2>").text(place.name);
-        let priceByNight = $("<div class='price_by_night'></div>").text(`$${place.price_by_night}`);
-
-        titleBox.append(title);
-        titleBox.append(priceByNight);
-
-        let information = $("<div class='information'></div>");
-        let maxGuest = $("<div class='max_guest'></div>").text(
-          `${place.max_guest} Guest${place.max_guest !== 1 ? "s" : ""}`
-        );
-        let numberRooms = $("<div class='number_rooms'></div>").text(
-          `${place.number_rooms} Bedroom${place.number_rooms !== 1 ? "s" : ""}`
-        );
-        let numberBathrooms = $("<div class='number_bathrooms'></div>").text(
-          `${place.number_bathrooms} Bathroom${place.number_bathrooms !== 1 ? "s" : ""}`
-        );
-
-        information.append(maxGuest);
-        information.append(numberRooms);
-        information.append(numberBathrooms);
-
-        let description = $("<div class='description'></div>").html(place.description);
-
-        article.append(titleBox);
-        article.append(information);
-        article.append(description);
+        let article = `<article>
+        <div class="title_box">
+          <h2>${place.name}</h2>
+          <div class="price_by_night">${place.price_by_night}</div>
+        </div>
+        <div class="information">
+          <div class="max_guest">${place.max_guest} Guests</div>
+          <div class="number_rooms">${place.number_rooms} Bedrooms</div>
+          <div class="number_bathrooms">
+            ${place.number_bathrooms} Bathrooms
+          </div>
+        </div>
+        <div class="description">${place.description}</div>
+      </article>`;
 
         $("section.places").append(article);
       }

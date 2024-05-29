@@ -28,6 +28,11 @@
       href="{{ url_for('static', filename='../static/styles/8-places.css', external=True) }}?cache_id={{ cache_id  }}"
     />
     <link rel="icon" href="../static/images/icon.png?cache={{ cache_id }}" />
+    <style>
+      .amenity-span {
+        margin-left: 2px;
+      }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../static/scripts/4-hbnb.js?{{ cache_id }}"></script>
     <title>HBnB</title>
@@ -63,7 +68,12 @@
           <div class="popover">
             <ul>
               {% for amenity in amenities %}
-              <li><input type="checkbox" data-id="{{amenity.id}}" data-name="{{amenity.name}}" />{{ amenity.name }}</li>
+              <li>
+                <input type="checkbox" data-id="{{amenity.id}}" data-name="{{amenity.name}}" /><span
+                  class="amenity-span"
+                  >{{ amenity.name }}</span
+                >
+              </li>
               {% endfor %}
             </ul>
           </div>
